@@ -37,10 +37,16 @@ def enterData():
 ## Task 3.2
 ## Modify the function code and return statement
 ## to display recipes for the ingredient entered
-@app.route('/result',methods = ['POST', 'GET'])
+@app.route('/result',methods = ['GET', 'POST'])
 def displayData():
     if request.method == 'POST':
-        pass
+      url= 'www.recipepuppy.com/api/?i={}'.format(ingredient)
+      re=requests.get(url)
+      req=re.json()
+      l=[]
+      for x in req:
+        l.append(x)
+      return '<h1>{}</h1>'.format(l)
 
 ## Task 4
 ## Note : Since this is a dyanmic URL, recipes function should recieve a paramter called `ingrdient` 
